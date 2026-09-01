@@ -204,7 +204,7 @@ class DestinationScreen extends StatelessWidget {
                         'No news available',
                         style: AppTextStyles.empty,
                       ),
-
+//
                     for (final article in state.news)
                       Padding(
                         padding: const EdgeInsets.only(bottom: 20),

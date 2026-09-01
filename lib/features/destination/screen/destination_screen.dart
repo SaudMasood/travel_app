@@ -199,7 +199,6 @@ class DestinationScreen extends StatelessWidget {
                     ),
 
                     const SizedBox(height: 10),
-//
                     if (state.news.isEmpty)
                       Text(
                         'No news available',

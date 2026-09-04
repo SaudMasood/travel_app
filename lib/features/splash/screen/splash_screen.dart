@@ -1,10 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-
-import '../../../theme/app_colors.dart';
-import '../../../theme/app_text_styles.dart';
-import '../../home/screen/home_screen.dart';
+import 'package:travel_app/features/main/mainscreen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -21,12 +18,10 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
       const Duration(seconds: 2),
           () {
-        if (!mounted) return;
-
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (_) => const HomeScreen(),
+            builder: (_) => const MainScreen(),
           ),
         );
       },
@@ -36,39 +31,56 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: const Color(0xFFF4F7FC),
+
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                color: AppColors.primary,
-                borderRadius: BorderRadius.circular(24),
-              ),
+            Transform.rotate(
+              angle: 0.90,
               child: const Icon(
-                Icons.travel_explore,
-                size: 55,
-                color: AppColors.white,
+                Icons.flight,
+                size: 90,
+                color: Color(0xFF4F46E5),
               ),
             ),
 
-            const SizedBox(height: 24),
+            const SizedBox(height: 10),
 
-            Text(
+            Container(
+              width: 120,
+              height: 120,
+              decoration: const BoxDecoration(
+                color: Color(0xFF06B6D4),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.public,
+                size: 75,
+                color: Colors.white,
+              ),
+            ),
+
+            const SizedBox(height: 35),
+
+            const Text(
               'Travel App',
-              style: AppTextStyles.heading1,
-              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF172554),
+              ),
             ),
 
             const SizedBox(height: 8),
 
-            Text(
+            const Text(
               'Explore the world with ease',
-              style: AppTextStyles.bodySmall,
-              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16,
+                color: Color(0xFF64748B),
+              ),
             ),
 
             const SizedBox(height: 35),
@@ -78,6 +90,7 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 28,
               child: CircularProgressIndicator(
                 strokeWidth: 3,
+                color: Color(0xFF4F46E5),
               ),
             ),
           ],

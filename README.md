@@ -607,7 +607,7 @@ Possible future improvements include:
 
 ### Saud Masood
 
-**BS Computer Science Student | Flutter Developer | AI/ML Enthusiast**
+**BS Computer Science Graduated | Flutter Developer | AI/ML Enthusiast**
 
 This project represents my practical learning and development work during
 my Flutter internship at Owasoft Technologies.
@@ -624,5 +624,8 @@ my Flutter internship at Owasoft Technologies.
 
 ⭐ If you find this project useful, consider giving it a star!
 
+REACH OUT
+Email: saudmasood974@gmail.com
+Contact: 03065059974
 </p>
 ```

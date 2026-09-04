@@ -114,7 +114,7 @@ class _AddEditTripScreenState extends State<AddEditTripScreen> {
                   prefixIcon: const Icon(
                     Icons.location_on_outlined,
                     color: Color(0xFF0891B2),
-                  ),
+                  ),//
                   filled: true,
                   fillColor: Colors.white,
                   border: OutlineInputBorder(

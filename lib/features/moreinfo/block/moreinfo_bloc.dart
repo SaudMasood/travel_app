@@ -28,17 +28,22 @@ class MoreInfoBloc extends Bloc<MoreInfoEvent, MoreInfoState> {
     emit(const MoreInfoLoading());
 
     try {
-      final holidayResponse = await apiService.get(
-        'https://date.nager.at/api/v3/PublicHolidays/2026/'
-            '${event.countryCode.toUpperCase()}',
-      );
+      List<HolidayModel> holidays = [];
 
-      final List<HolidayModel> holidays =
-      (holidayResponse as List)
-          .map(
-            (json) => HolidayModel.fromJson(json),
-      )
-          .toList();
+      try {
+        final response = await apiService.get(
+          'https://date.nager.at/api/v3/PublicHolidays/2026/'
+              '${event.countryCode.toUpperCase()}',
+        );
+
+        if (response is List) {
+          holidays = response
+              .map((json) => HolidayModel.fromJson(json))
+              .toList();
+        }
+      } catch (e) {
+        print('Holiday API Error: $e');
+      }
 
       final sunriseResponse = await apiService.get(
         'https://api.sunrise-sunset.org/json'
@@ -47,8 +52,7 @@ class MoreInfoBloc extends Bloc<MoreInfoEvent, MoreInfoState> {
             '&date=today',
       );
 
-      final sunrise =
-      SunriseModel.fromJson(sunriseResponse);
+      final sunrise = SunriseModel.fromJson(sunriseResponse);
 
       final locationResponse = await apiService.get(
         'https://nominatim.openstreetmap.org/search'
@@ -59,9 +63,7 @@ class MoreInfoBloc extends Bloc<MoreInfoEvent, MoreInfoState> {
 
       final List<LocationModel> locations =
       (locationResponse as List)
-          .map(
-            (json) => LocationModel.fromJson(json),
-      )
+          .map((json) => LocationModel.fromJson(json))
           .toList();
 
       final elevationResponse = await apiService.get(
@@ -72,8 +74,7 @@ class MoreInfoBloc extends Bloc<MoreInfoEvent, MoreInfoState> {
       final List elevationResults =
       elevationResponse['results'];
 
-      final elevation =
-      ElevationModel.fromJson(
+      final elevation = ElevationModel.fromJson(
         elevationResults.first,
       );
 
@@ -92,13 +93,10 @@ class MoreInfoBloc extends Bloc<MoreInfoEvent, MoreInfoState> {
       );
 
       final List bookResults =
-      bookResponse['docs'];
+          bookResponse['docs'] ?? [];
 
-      final List<BookModel> books =
-      bookResults
-          .map(
-            (json) => BookModel.fromJson(json),
-      )
+      final List<BookModel> books = bookResults
+          .map((json) => BookModel.fromJson(json))
           .toList();
 
       final cityResponse = await apiService.get(
@@ -112,11 +110,8 @@ class MoreInfoBloc extends Bloc<MoreInfoEvent, MoreInfoState> {
       final List cityResults =
           cityResponse['results'] ?? [];
 
-      final List<CityModel> cities =
-      cityResults
-          .map(
-            (json) => CityModel.fromJson(json),
-      )
+      final List<CityModel> cities = cityResults
+          .map((json) => CityModel.fromJson(json))
           .toList();
 
       emit(
@@ -131,10 +126,10 @@ class MoreInfoBloc extends Bloc<MoreInfoEvent, MoreInfoState> {
         ),
       );
     } catch (e) {
+      print('More Info Error: $e');
+
       emit(
-        MoreInfoError(
-          e.toString(),
-        ),
+        MoreInfoError(e.toString()),
       );
     }
   }

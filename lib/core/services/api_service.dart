@@ -6,20 +6,23 @@ class ApiService {
     try {
       final response = await http.get(
         Uri.parse(url),
+        headers: {
+          'User-Agent': 'TravelApp/1.0',
+        },
       );
+
+      print('URL: $url');
+      print('STATUS: ${response.statusCode}');
 
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
       }
 
-      throw Exception(
-        'GET failed: ${response.statusCode}',
-      );
+      throw Exception('GET failed: ${response.statusCode}');
     } catch (e) {
       throw Exception('GET Error: $e');
     }
   }
-
   Future<dynamic> post(
       String url,
       Map<String, dynamic> data,

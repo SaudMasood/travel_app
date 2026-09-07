@@ -120,7 +120,6 @@ class InfoBloc extends Bloc<InfoEvent, InfoState> {
           countries: countries,
         ),
       );
-//
       print('ALL INFO APIs COMPLETED');
     } catch (e) {
       print('INFO API ERROR: $e');
